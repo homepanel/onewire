@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config>
+	<service>
+		<logbackXmlPath>etc/logback.xml</logbackXmlPath>
+	</service>
+    <mqtt>
+		<brokers>
+			<broker>
+				<host>1.example.com</host>
+				<port>1883</port>
+				<username>test</username>		
+				<password>test</password>		
+				<qosPublish>AT_MOST_ONCE</qosPublish>
+				<qosSubscribe>AT_MOST_ONCE</qosSubscribe>
+				<retain>false</retain>
+			</broker>
+			<broker>
+				<host>2.example.com</host>
+				<port>1883</port>
+				<username>test</username>		
+				<password>test</password>		
+				<qosPublish>AT_MOST_ONCE</qosPublish>
+				<qosSubscribe>AT_MOST_ONCE</qosSubscribe>
+				<retain>false</retain>
+			</broker>
+		</brokers>
+		<reconnectTimeoutValue>5</reconnectTimeoutValue>
+		<reconnectTimeoutUnit>SECONDS</reconnectTimeoutUnit>
+		<refreshIntervalValue>1</refreshIntervalValue>
+		<refreshIntervalUnit>HOURS</refreshIntervalUnit>		
+    </mqtt>
+	<topics>
+	<topics>
+		<!-- front door keys -->
+		<topic route="/bus.3/01.XXXXXXXXXXXX" type="SWITCH" priority="HIGHEST" refreshIntervalValue="500" refreshIntervalUnit="MILLISECONDS">onewire/frontDoor/key/grey</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" type="SWITCH" priority="HIGHEST" refreshIntervalValue="500" refreshIntervalUnit="MILLISECONDS">onewire/frontDoor/key/blue</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" type="SWITCH" priority="HIGHEST" refreshIntervalValue="500" refreshIntervalUnit="MILLISECONDS">onewire/frontDoor/key/yellow</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" type="SWITCH" priority="HIGHEST" refreshIntervalValue="500" refreshIntervalUnit="MILLISECONDS">onewire/frontDoor/key/red</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" type="SWITCH" priority="HIGHEST" refreshIntervalValue="500" refreshIntervalUnit="MILLISECONDS">onewire/frontDoor/key/green</topic>
+		
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.2" type="TIMED_SWITCH">onewire/frontDoor/lock</topic>
+		
+		<!-- heating -->
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="PIO.6" type="SWITCH">onewire/heating/requestSwitch</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="PIO.7" type="SWITCH">onewire/heating/circulatingPumpSwitch</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT">onewire/heating/flowTemperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT">onewire/heating/returnTemperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT">onewire/heating/boilerTemperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/diningRoom/temperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/diningRoom/humidity</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="PIO.0" type="SWITCH">onewire/diningRoom/underfloorHeatingSwitch</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/officeRoom/temperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/officeRoom/humidity</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="PIO.1" type="SWITCH">onewire/officeRoom/underfloorHeatingSwitch</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/utilityRoom/temperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/utilityRoom/humidity</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="PIO.2" type="SWITCH">onewire/utilityRoom/underfloorHeatingSwitch</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/corridor/temperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/corridor/humidity</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="PIO.3" type="SWITCH">onewire/corridor/underfloorHeatingSwitch</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/toilet/temperature</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/toilet/humidity</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="PIO.4" type="SWITCH">onewire/toilet/underfloorHeatingSwitch</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="PIO.0" type="SWITCH">onewire/bathRoom/radiatorHeatingSwitch</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/livingRoom/temperature</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/livingRoom/humidity</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="PIO.1" type="SWITCH">onewire/livingRoom/underfloorHeatingSwitch</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" prefreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/bathRoom/temperature</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/bathRoom/humidity</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="PIO.2" type="SWITCH">onewire/bathRoom/underfloorHeatingSwitch</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/childsRoom1/temperature</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/childsRoom1/humidity</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="PIO.3" type="SWITCH">onewire/childsRoom1/underfloorHeatingSwitch</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="temperature" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/bedRoom/temperature</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="humidity" type="FLOAT" priority="LOW" refreshIntervalValue="60" refreshIntervalUnit="SECONDS">onewire/bedRoom/humidity</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="PIO.4" type="SWITCH">onewire/bedRoom/underfloorHeatingSwitch</topic>
+		
+		<!-- room -->
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/diningRoom/visValue</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/officeRoom/visValue</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/utilityRoom/visValue</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/corridor/visValue</topic>
+		<topic route="/bus.1/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/toilet/visValue</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/livingRoom/visValue</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/bathRoom/visValue</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/childsRoom1/visValue</topic>
+		<topic route="/bus.2/01.XXXXXXXXXXXX" property="vis" type="FLOAT">onewire/bedRoom/visValue</topic>
+		
+		<!-- rollershutter -->
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.4" type="TIMED_SWITCH">onewire/diningRoom/rollerShutterDownSwitch</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.5" type="TIMED_SWITCH">onewire/diningRoom/rollerShutterUpSwitch</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.6" type="TIMED_SWITCH">onewire/livingRoom/rollerShutterDownSwitch</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.7" type="TIMED_SWITCH">onewire/livingRoom/rollerShutterUpSwitch</topic>
+		
+		<!-- outdoor -->
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.3" type="SWITCH" invert="true">onewire/outdoor/lightSwitch</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="volt.A" type="FLOAT" priority="HIGHEST" refreshIntervalValue="1" refreshIntervalUnit="SECONDS">onewire/outdoor/windValue</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="volt.B" type="FLOAT" priority="HIGHEST" refreshIntervalValue="1" refreshIntervalUnit="SECONDS">onewire/outdoor/windDirectionValue</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="volt.C" type="FLOAT">onewire/outdoor/temperatureValue</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="volt.D" type="FLOAT">onewire/outdoor/humidityValue</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="volt.A" type="FLOAT">onewire/outdoor/illuminanceValue</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.0" type="SWITCH">onewire/outdoor/windSensorHeating</topic>
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="PIO.1" type="SWITCH">onewire/outdoor/windDirectionSensorHeating</topic>
+		
+		<!-- measurement -->
+		<topic route="/bus.3/01.XXXXXXXXXXXX" property="counter.A" type="LONG">onewire/basement/totalElectricMeterPulse</topic>
+	</topics>
+	<onewire>
+		<host>1.example.com</host>
+		<port>4304</port>
+		<pollingExecutorServicePoolSize>25</pollingExecutorServicePoolSize>
+	</onewire>
+</config>
