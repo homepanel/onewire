@@ -1,21 +1,16 @@
 package com.homepanel.onewire.service;
 
+import com.homepanel.onewire.config.Topic;
+import jakarta.xml.bind.annotation.XmlTransient;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class DirectoryListing {
 
-    private List<String> entries;
     private Long lastJobRunningTimeInMilliseconds;
-    private Boolean executing;
-
-    public List<String> getEntries() {
-        return entries;
-    }
-
-    public void setEntries(List<String> entries) {
-        this.entries = entries;
-    }
+    public Boolean currentlyReading;
+    private List<Topic> topics;
 
     public Long getLastJobRunningTimeInMilliseconds() {
         return lastJobRunningTimeInMilliseconds;
@@ -25,16 +20,29 @@ public class DirectoryListing {
         this.lastJobRunningTimeInMilliseconds = lastJobRunningTimeInMilliseconds;
     }
 
-    public Boolean isExecuting() {
-        return executing;
+    public synchronized Boolean isCurrentlyReading() {
+        if (this.currentlyReading != null && this.currentlyReading) {
+            return true;
+        } else {
+            this.currentlyReading = true;
+            return false;
+        }
     }
 
-    public void setExecuting(Boolean executing) {
-        this.executing = executing;
+    public void setCurrentlyReading(Boolean currentlyReading) {
+        this.currentlyReading = currentlyReading;
+    }
+
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    public void setTopics(List<Topic> topics) {
+        this.topics = topics;
     }
 
     public DirectoryListing() {
-        this.entries = new ArrayList<>();
-        this.executing = false;
+        this.topics = new ArrayList<>();
+        this.currentlyReading = false;
     }
 }

@@ -10,9 +10,14 @@ public class OwfsClientFactory {
 
     private static OwfsClientFactory INSTANCE;
 
+    private Service service;
     private String host;
     private Integer port;
     private final List<OwfsClient> owfsClients = new ArrayList<>();
+
+    public Service getService() {
+        return service;
+    }
 
     public String read(String path) throws OwfsException, InterruptedException {
 
@@ -84,7 +89,9 @@ public class OwfsClientFactory {
     }
 
     private void build(OwfsClientFactory.Builder builder) {
-        Config config = builder.config;
+
+        this.service = builder.service;
+        Config config = builder.service.getConfig();
 
         if (config.getOnewire() != null && config.getOnewire().getHost() != null && config.getOnewire().getPort() != null) {
             this.host = config.getOnewire().getHost();
@@ -94,10 +101,10 @@ public class OwfsClientFactory {
 
     public static class Builder {
 
-        private Config config;
+        private Service service;
 
-        public Builder(Config config) {
-            this.config = config;
+        public Builder(Service service) {
+            this.service = service;
         }
 
         public void build() {

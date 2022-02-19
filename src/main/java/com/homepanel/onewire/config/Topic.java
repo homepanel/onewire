@@ -97,8 +97,13 @@ public class Topic implements InterfaceTopic, InterfaceTopicValue, InterfaceTopi
     }
 
     @XmlTransient
-    public Boolean getCurrentlyReading() {
-        return currentlyReading;
+    public synchronized Boolean isCurrentlyReading() {
+        if (this.currentlyReading != null && this.currentlyReading) {
+            return true;
+        } else {
+            this.currentlyReading = true;
+            return false;
+        }
     }
 
     public void setCurrentlyReading(Boolean currentlyReading) {
